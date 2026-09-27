@@ -15,6 +15,8 @@ def handle_exceptions(func):
 
 
 class Metrics:
+    BYTES_PER_GB = 1024 ** 3
+
     @property
     @handle_exceptions
     def temperature(self) -> float:
@@ -27,7 +29,7 @@ class Metrics:
     def battery(self) -> float:
         '''Get machine battery charge percentage'''
         self._battery = psutil.sensors_battery()
-        return round(self._battery.percent,2) if self.battery else None
+        return round(self._battery.percent,2) if self._battery else None
 
     @property
     @handle_exceptions
@@ -35,6 +37,28 @@ class Metrics:
         '''Get RAM usage percentage'''
         self._memory_percentage = psutil.virtual_memory().percent
         return self._memory_percentage
+
+    @property
+    @handle_exceptions
+    def root_directory_used_percentage(self) -> float:
+        '''Get disk usage percentage'''
+        self.disk_usage_percentage = psutil.disk_usage("/").percent
+        return self.disk_usage_percentage
+
+    @property
+    @handle_exceptions
+    def root_directory_total_gigabyte(self) -> float:
+        '''Get disk total gigabytes'''
+        self.total_disk_gigabyte = psutil.disk_usage("/").total
+        return round(self.total_disk_gigabyte / self.BYTES_PER_GB, 2)
+
+    @property
+    @handle_exceptions
+    def root_directory_used_gigabyte(self) -> float:
+        '''Get disk usage gigabytes'''
+        self.disk_usage_gigabyte = psutil.disk_usage("/").used
+        return round(self.disk_usage_gigabyte / self.BYTES_PER_GB, 2)
+
 
 if platform.system() != "Linux":
     raise RuntimeError("Metrics supported only on Linux systems")
