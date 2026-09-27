@@ -19,22 +19,22 @@ class Metrics:
     @handle_exceptions
     def temperature(self) -> float:
         '''Get CPU temperature'''
-        self.temperature = psutil.sensors_temperatures()['acpitz'][0].current
-        return self.temperature
+        self._temperature = psutil.sensors_temperatures()['acpitz'][0].current
+        return self._temperature
 
     @property
     @handle_exceptions
     def battery(self) -> float:
         '''Get machine battery charge percentage'''
-        self.battery = psutil.sensors_battery()
-        return round(self.battery.percent,2) if self.battery else None
+        self._battery = psutil.sensors_battery()
+        return round(self._battery.percent,2) if self.battery else None
 
     @property
     @handle_exceptions
     def memory_percentage(self) -> float:
         '''Get RAM usage percentage'''
-        self.memory_percentage = psutil.virtual_memory().percent
-        return self.memory_percentage
+        self._memory_percentage = psutil.virtual_memory().percent
+        return self._memory_percentage
 
 if platform.system() != "Linux":
     raise RuntimeError("Metrics supported only on Linux systems")
