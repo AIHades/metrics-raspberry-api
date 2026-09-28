@@ -4,12 +4,13 @@ ws.onopen = () => console.log("connected");
 
 ws.onmessage = (e) => {
     const data = JSON.parse(e.data)
-    const temperature = document.getElementById("temperature").innerHTML = `${data.temperature}`;
-    const battery = document.getElementById("battery").innerHTML = `${data.battery}`
-    const memory_percentage = document.getElementById("memory-percentage").innerHTML = `${data.memory_percentage}`
-    const disk_usage_percentage = document.getElementById("disk_usage_percentage").innerHTML = `${data.disk_usage_percentage}`
-    const total_disk_gigabyte = document.getElementById("total_disk_gigabyte").innerHTML = `${data.total_disk_gigabyte}`
-    const disk_usage_gigabyte = document.getElementById("disk_usage_gigabyte").innerHTML = `${data.disk_usage_gigabyte}`
+    document.getElementById("temperature").innerHTML = `${data.temperature}`;
+    document.getElementById("battery").innerHTML = `${data.battery}`
+    document.getElementById("memory-percentage").innerHTML = `${data.memory_percentage}`
+    document.getElementById("disk_usage_percentage").innerHTML = `${data.disk_usage_percentage}`
+    document.getElementById("total_disk_gigabyte").innerHTML = `${data.total_disk_gigabyte}`
+    document.getElementById("disk_usage_gigabyte").innerHTML = `${data.disk_usage_gigabyte}`
+    document.getElementById("uptime_system").innerHTML = `${data.uptime_system}`
     console.log(e)
 };
 

@@ -67,7 +67,8 @@ body{
 
 /* ---------- Card ---------- */
 
-.metric-card{
+.metric-card,
+.metric-card-time{
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 16px;
@@ -95,7 +96,8 @@ body{
 }
 
 .gauge svg,
-.gauge-readout{
+.gauge-readout,
+.gauge-time{
     grid-area: 1 / 1;
 }
 
@@ -125,7 +127,8 @@ body{
 .gauge--memory  .gauge-fill{ stroke: var(--memory); }
 .gauge--disk    .gauge-fill{ stroke: var(--disk); }
 
-.gauge-readout{
+.gauge-readout,
+.gauge-time{
     display: flex;
     align-items: baseline;
     justify-content: center;
@@ -134,7 +137,8 @@ body{
     font-family: 'JetBrains Mono', monospace;
 }
 
-.gauge-readout span{
+.gauge-readout span,
+.gauge-time span{
     font-size: clamp(1.5rem, 5vw, 2rem);
     font-weight: 700;
 }
