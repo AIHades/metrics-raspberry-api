@@ -1,0 +1,231 @@
+:root{
+    --bg:            #0E141C;
+    --card-bg:       #171F2B;
+    --card-border:   #232C3A;
+    --text-primary:  #EDF1F7;
+    --text-muted:    #7C889B;
+
+    --temp:          #F2994A;
+    --battery:       #4ADE80;
+    --memory:        #7C93FF;
+    --disk:          #EAFF01;
+
+    --track:         #232C3A;
+}
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+body{
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 24px;
+}
+
+/* ---------- Layout ---------- */
+
+.page{
+    width: 100%;
+    max-width: 920px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.page-title{
+    margin: 0;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.board{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+@media (max-width: 720px){
+    .board{
+        grid-template-columns: 1fr;
+        max-width: 320px;
+    }
+}
+
+/* ---------- Card ---------- */
+
+.metric-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.metric-label{
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+}
+
+/* ---------- Gauge ---------- */
+
+.gauge{
+    display: grid;
+    place-items: center;
+    width: clamp(120px, 30vw, 150px);
+    aspect-ratio: 1 / 1;
+}
+
+.gauge svg,
+.gauge-readout{
+    grid-area: 1 / 1;
+}
+
+.gauge svg{
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.gauge-track,
+.gauge-fill{
+    fill: none;
+    stroke-width: 10;
+}
+
+.gauge-track{
+    stroke: var(--track);
+}
+
+.gauge-fill{
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s ease;
+}
+
+.gauge--temp    .gauge-fill{ stroke: var(--temp); }
+.gauge--battery .gauge-fill{ stroke: var(--battery); }
+.gauge--memory  .gauge-fill{ stroke: var(--memory); }
+.gauge--disk    .gauge-fill{ stroke: var(--disk); }
+
+.gauge-readout{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px;
+    line-height: 1;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.gauge-readout span{
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 700;
+}
+
+.gauge-readout small{
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ---------- Flip card (disk) ---------- */
+
+.metric-card--flip{
+    background: none;
+    border: none;
+    padding: 0;
+    height: clamp(230px, 34vw, 264px);
+    perspective: 1200px;
+    cursor: pointer;
+}
+
+.metric-card--flip:focus-visible{
+    outline-offset: 4px;
+    border-radius: 16px;
+}
+
+.card-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+.metric-card--flip.is-flipped .card-inner{
+    transform: rotateY(180deg);
+}
+
+.card-face{
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.card-face--back{
+    transform: rotateY(180deg);
+}
+
+.disk-stat{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.disk-stat span{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.disk-stat small{
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.disk-stat--total span,
+.disk-stat--total small{
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ---------- Accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce){
+    .gauge-fill{
+        transition: none;
+    }
+}
+
+:focus-visible{
+    outline: none;
+}
