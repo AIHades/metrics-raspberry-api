@@ -23,6 +23,7 @@ def get_metrics() -> MetricsSchema:
         disk_usage_percentage = metrics.root_directory_used_percentage,
         total_disk_gigabyte = metrics.root_directory_total_gigabyte,
         disk_usage_gigabyte = metrics.root_directory_used_gigabyte,
+        uptime_system = metrics.uptime,
     )
 
 @router.get("/")

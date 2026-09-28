@@ -8,3 +8,4 @@ class MetricsSchema(BaseModel):
     disk_usage_percentage: float | None = None
     total_disk_gigabyte: float | None = None
     disk_usage_gigabyte: float | None = None
+    uptime_system: float | None = None
