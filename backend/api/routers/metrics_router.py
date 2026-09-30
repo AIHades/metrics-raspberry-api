@@ -17,7 +17,7 @@ templates = Jinja2Templates(directory=settings.templates_dir)
 def get_metrics() -> MetricsSchema:
     """Return current system metrics"""
     return MetricsSchema(
-        temperature=metrics.temperature,
+        cpu_temperature=metrics.temperature,
         battery=metrics.battery,
         memory_percentage=metrics.memory_percentage,
         disk_usage_percentage = metrics.root_directory_used_percentage,

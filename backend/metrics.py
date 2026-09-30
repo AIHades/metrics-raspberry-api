@@ -17,14 +17,17 @@ def handle_exceptions(func):
 
 class Metrics:
     BYTES_PER_GB = 1024 ** 3
-    SECONDS_PER_HOURS = 3600
 
     @property
     @handle_exceptions
     def temperature(self) -> float:
         '''Get CPU temperature'''
-        self._temperature = psutil.sensors_temperatures()['acpitz'][0].current
-        return self._temperature
+        self.temperature_sensors = ("acpitz", "coretemp", "k10temp", "cpu_thermal", "nvme")
+        self.cpu_temperature = psutil.sensors_temperatures()
+
+        for sensor in self.temperature_sensors:
+            if sensor in self.cpu_temperature:
+                return round(self.cpu_temperature[sensor][0].current, 1)
 
     @property
     @handle_exceptions

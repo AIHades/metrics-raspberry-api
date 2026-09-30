@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class MetricsSchema(BaseModel):
-    temperature: float | None = None
+    cpu_temperature: float | None = None
     battery: float | None = None
     memory_percentage : float | None = None
     disk_usage_percentage: float | None = None
