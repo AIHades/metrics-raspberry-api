@@ -4,7 +4,7 @@ ws.onopen = () => console.log("connected");
 
 ws.onmessage = (e) => {
     const data = JSON.parse(e.data)
-    document.getElementById("temperature").innerHTML = `${data.temperature}`;
+    document.getElementById("temperature").innerHTML = `${data.cpu_temperature}`;
     document.getElementById("battery").innerHTML = `${data.battery}`
     document.getElementById("memory-percentage").innerHTML = `${data.memory_percentage}`
     document.getElementById("disk_usage_percentage").innerHTML = `${data.disk_usage_percentage}`
