@@ -17,31 +17,34 @@
     box-sizing: border-box;
 }
 
-html, body{
-    height: 100%;
-    margin: 0;
+html{
+    min-height: 100%;
 }
 
 body{
+    margin: 0;
+    min-height: 100vh;
     background: var(--bg);
     color: var(--text-primary);
     font-family: 'Inter', system-ui, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
     padding: 24px;
+    display: flex;
 }
 
 /* ---------- Layout ---------- */
 
 .page{
+    /* margin:auto centers the page both ways when there's room (desktop).
+       Unlike justify-content/align-items:center, auto margins collapse to 0
+       instead of clipping once content is taller than the viewport, so on a
+       short/mobile screen everything stays reachable by scrolling from the top. */
+    margin: auto;
     width: 100%;
     max-width: 920px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 24px;
 }
 
 .page-title{
@@ -49,19 +52,20 @@ body{
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     font-weight: 600;
     color: var(--text-primary);
+    text-align: center;
 }
 
 .board{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, minmax(180px, 1fr));
-    gap: 24px;
+    gap: 20px;
 }
 
 @media (max-width: 720px){
     .board{
-        grid-template-columns: 1fr;
-        max-width: 320px;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 16px;
     }
 }
 
@@ -72,7 +76,7 @@ body{
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 16px;
-    padding: 28px 16px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,6 +88,7 @@ body{
     font-size: 0.95rem;
     color: var(--text-muted);
     letter-spacing: 0.01em;
+    text-align: center;
 }
 
 /* ---------- Gauge ---------- */
@@ -91,7 +96,7 @@ body{
 .gauge{
     display: grid;
     place-items: center;
-    width: clamp(120px, 30vw, 150px);
+    width: clamp(110px, 28vw, 150px);
     aspect-ratio: 1 / 1;
 }
 
@@ -139,7 +144,7 @@ body{
 
 .gauge-readout span,
 .gauge-time span{
-    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-size: clamp(1.3rem, 4.5vw, 2rem);
     font-weight: 700;
 }
 
@@ -155,12 +160,13 @@ body{
     background: none;
     border: none;
     padding: 0;
-    height: clamp(230px, 34vw, 264px);
+    height: clamp(210px, 32vw, 254px);
     perspective: 1200px;
     cursor: pointer;
 }
 
 .metric-card--flip:focus-visible{
+    outline: 2px solid var(--disk);
     outline-offset: 4px;
     border-radius: 16px;
 }
@@ -184,7 +190,7 @@ body{
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 16px;
-    padding: 28px 16px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -228,8 +234,4 @@ body{
     .gauge-fill{
         transition: none;
     }
-}
-
-:focus-visible{
-    outline: none;
 }

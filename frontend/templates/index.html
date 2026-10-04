@@ -30,19 +30,6 @@
         </article>
 
         <article class="metric-card" data-max="100" data-unit="%">
-            <div class="gauge gauge--battery" role="img" aria-label="Battery">
-                <svg viewBox="0 0 120 120">
-                    <circle class="gauge-track" cx="60" cy="60" r="52"/>
-                    <circle class="gauge-fill"  cx="60" cy="60" r="52"/>
-                </svg>
-                <div class="gauge-readout">
-                    <span id="battery">--</span><small>%</small>
-                </div>
-            </div>
-            <p class="metric-label">Battery</p>
-        </article>
-
-        <article class="metric-card" data-max="100" data-unit="%">
             <div class="gauge gauge--memory" role="img" aria-label="Memory usage">
                 <svg viewBox="0 0 120 120">
                     <circle class="gauge-track" cx="60" cy="60" r="52"/>
@@ -90,7 +77,20 @@
                     <span id="uptime_system">--</span>
                 </div>
             </div>
-            <p class="metric-label">Time</p>
+            <p class="metric-label">Uptime</p>
+        </article>
+
+        <article class="metric-card" data-max="100" data-unit="%">
+            <div class="gauge gauge--battery" role="img" aria-label="Battery">
+                <svg viewBox="0 0 120 120">
+                    <circle class="gauge-track" cx="60" cy="60" r="52"/>
+                    <circle class="gauge-fill"  cx="60" cy="60" r="52"/>
+                </svg>
+                <div class="gauge-readout">
+                    <span id="battery">--</span><small>%</small>
+                </div>
+            </div>
+            <p class="metric-label">Battery</p>
         </article>
 
         </div>
